@@ -91,6 +91,8 @@ IMPLEMENT_DYNCREATE(CImportExportDoc, OCC_3dDoc)
 		ON_COMMAND(ID_BUTTONCut,OnCut)
 		ON_COMMAND(ID_BUTTON_BoxMake,OnMakeBoxDrill)
 		ON_COMMAND(ID_BUTTON_Volute,OnVolute)
+		ON_COMMAND(ID_BUTTON_Thickness,OnThickness)
+		ON_COMMAND(ID_BUTTON_FaceOffSet,OnOffSet)
 
 		//ON_COMMAND(ID_BUTTONImportBREPNew,OnBREPFile)
 
@@ -236,7 +238,7 @@ IMPLEMENT_DYNCREATE(CImportExportDoc, OCC_3dDoc)
 
 		double surfaceArea=surfaceProps.Mass();
 		CString fivs;
-		fivs.Format(_T("surface %g\n",surfaceArea));
+		
 		//AfxMessageBox(fivs);
 
 		return surfaceArea;
@@ -271,187 +273,276 @@ IMPLEMENT_DYNCREATE(CImportExportDoc, OCC_3dDoc)
 		voluteDlg->Create(IDD_DIALOG_Volute);
 		voluteDlg->ShowWindow(SW_SHOW);
 
-		//double angle1=45.00;
-		//double angle2=45.00;
-		//double height=25+5;
-		//double initialHeight=height;
-		//double width=10;
-		//double startPointx=0;
-		//double ang1Tan= tan(angle1*PI/180.0);
-		//double ang2Tan= tan(angle2*PI/180.0);
-		//double area=150;
-		//double degree_0_percentage=5;
 
 
-		//gp_Pnt r1(width/2.,height*2.,0);
-		//gp_Pnt q1(0,0,0); 
-		//gp_Pnt q2(-(height/ang2Tan),height,0);
-		//gp_Pnt p1(width,0,0);
-		//gp_Pnt p2(((height/ang1Tan)+width),height,0);
-		//gp_Pnt q3(-((height+height/10)/ang2Tan),(height+height/10),0);
-		//gp_Pnt q4(-((height+height/4)/ang2Tan),(height+height/4),0);
-		//gp_Pnt q5(-(height/ang2Tan),(height+height/3),0);
 
 
-		//gp_Pnt p3(width+((height+height/10)/ang2Tan),(height+height/10),0);
-		//gp_Pnt p4(width+((height+height/4)/ang2Tan),(height+height/4),0);
-		//gp_Pnt p5((width+height/ang2Tan),(height+height/3),0);
 
+	}
 
-		//BRepBuilderAPI_MakeEdge line1(p1,p2);
-		//BRepBuilderAPI_MakeEdge line2(q1,q2);
-		//BRepBuilderAPI_MakeEdge line3(q1,p1);
-		//BRepBuilderAPI_MakeEdge line4(q2,p2);
 
+	void CImportExportDoc::OnOffSet()
+	{
 
 
-		//BRepBuilderAPI_MakeWire voluteBaseWire1(line1,line3,line2);
-		//BRepBuilderAPI_MakeWire trapeziumWire(line1,line3,line2,line4);
 
-		////----------------------------------
+	}
 
-		//TColgp_Array1OfPnt qCurvePoles(1,5); 
-		//qCurvePoles(1) = q2; 
-		//qCurvePoles(2) = q4; 
-		//qCurvePoles(3) = r1;
-		//qCurvePoles(4) = p4; 
-		//qCurvePoles(5) = p2; 
-		//Handle(Geom_BezierCurve) qCurve = new Geom_BezierCurve(qCurvePoles); 
-		//TopoDS_Edge curveEdge = BRepBuilderAPI_MakeEdge(qCurve); 
-		//BRepBuilderAPI_MakeWire initialCurveWire(curveEdge,line4);
-		//BRepBuilderAPI_MakeWire initialwholeWire (voluteBaseWire1,curveEdge);
 
-		//BRepTools::Write( initialwholeWire,"D:/Breps/tRapAxis.brep");
-		////BRepBuilderAPI_MakeWire wire2(wire1,mainE);
-		////BRepBuilderAPI_MakeWire voluteCross(wire2,pE)
-		//TopoDS_Shape sh=trapeziumWire;
-		//Fit();
+	void CImportExportDoc::OnThickness()
+	{
 
-		////for 50% piece
 
+		double angle1=45.00;
+		double angle2=45.00;
+		double height=25+5;
+		double initialHeight=height;
+		double width=10;
+		double startPointx=0;
+		double ang1Tan= tan(angle1*PI/180.0);
+		double ang2Tan= tan(angle2*PI/180.0);
+		double area=150;
+		double degree_0_percentage=5;
+		double thickness=0.2;
 
 
+		gp_Pnt r1(width/2.,height*2.,0);
+		gp_Pnt q1(0,0,0); 
+		gp_Pnt q2(-(height/ang2Tan),height,0);
+		gp_Pnt p1(width,0,0);
+		gp_Pnt p2(((height/ang1Tan)+width),height,0);
+		gp_Pnt q3(-((height+height/10)/ang2Tan),(height+height/10),0);
+		gp_Pnt q4(-((height+height/4)/ang2Tan),(height+height/4),0);
+		gp_Pnt q5(-(height/ang2Tan),(height+height/3),0);
 
 
+		gp_Pnt p3(width+((height+height/10)/ang2Tan),(height+height/10),0);
+		gp_Pnt p4(width+((height+height/4)/ang2Tan),(height+height/4),0);
+		gp_Pnt p5((width+height/ang2Tan),(height+height/3),0);
 
 
-		//double initialTrapaziumArea = getSurfaceArea(trapeziumWire);
-		//double initailWholeArea= getSurfaceArea(initialwholeWire);
-		//double expectedWholeArea = initailWholeArea*(degree_0_percentage/100);//Expected whole area
+		BRepBuilderAPI_MakeEdge line1(p1,p2);
+		BRepBuilderAPI_MakeEdge line2(q1,q2);
+		BRepBuilderAPI_MakeEdge line3(q1,p1);
+		BRepBuilderAPI_MakeEdge line4(q2,p2);
 
-		//double intialCurveArea=getSurfaceArea(initialCurveWire);
-		//double ExpectedTrapeziumArea = initialTrapaziumArea*(degree_0_percentage/100);//user percentage of the 0 point area
-		//double newTrapeziumHeight= getTrapezuimHeight(ExpectedTrapeziumArea,width,ang1Tan,ang2Tan);//calculating the height
-		//double ExpectedCurveArea = intialCurveArea*(degree_0_percentage/100);
-		//TopoDS_Wire newWholeWire=createNewShapeWithRightArea(newTrapeziumHeight,width,ang1Tan,ang2Tan,expectedWholeArea,initialHeight);
 
 
+		BRepBuilderAPI_MakeWire voluteBaseWire1(line1,line3,line2);
+		BRepBuilderAPI_MakeWire trapeziumWire(line1,line3,line2,line4);
 
-		//TopoDS_Shape rotatedShape;
-		//gp_Trsf transfer;
-		//BRepOffsetAPI_ThruSections sections;
+		//----------------------------------
 
-		//gp_Ax1 axis(gp_Pnt(0,-15,0),gp_Dir(1,0,0));
-		////initial wire rotation
-		//
+		TColgp_Array1OfPnt qCurvePoles(1,5); 
+		qCurvePoles(1) = q2; 
+		qCurvePoles(2) = q4; 
+		qCurvePoles(3) = r1;
+		qCurvePoles(4) = p4; 
+		qCurvePoles(5) = p2; 
+		Handle(Geom_BezierCurve) qCurve = new Geom_BezierCurve(qCurvePoles); 
+		TopoDS_Edge curveEdge = BRepBuilderAPI_MakeEdge(qCurve); 
+		BRepBuilderAPI_MakeWire initialCurveWire(curveEdge,line4);
+		BRepBuilderAPI_MakeWire initialwholeWire (voluteBaseWire1,curveEdge);
 
-		//double ang=360;
-		//transfer.SetRotation(axis,ang*PI/180);
-		//BRepBuilderAPI_Transform rotated(newWholeWire,transfer);
-		//rotatedShape=rotated.Shape();
-		//newWholeWire=TopoDS::Wire(rotatedShape);
-		//sections.AddWire(newWholeWire);
 
+		BRepTools::Write( initialwholeWire,"D:/Breps/tRapAxis.brep");
+		//BRepBuilderAPI_MakeWire wire2(wire1,mainE);
+		//BRepBuilderAPI_MakeWire voluteCross(wire2,pE)
+		TopoDS_Shape sh=trapeziumWire;
+		Fit();
 
-		//double areaIncreasingFactor=(100-degree_0_percentage)/18;
+		//for 50% piece
 
-		//CString areaIncreacingFactor;
+		double initialTrapaziumArea = getSurfaceArea(trapeziumWire);
+		double initailWholeArea= getSurfaceArea(initialwholeWire);
+		double expectedWholeArea = initailWholeArea*(degree_0_percentage/100);//Expected whole area
 
+		double intialCurveArea=getSurfaceArea(initialCurveWire);
+		double ExpectedTrapeziumArea = initialTrapaziumArea*(degree_0_percentage/100);//user percentage of the 0 point area
+		double newTrapeziumHeight= getTrapezuimHeight(ExpectedTrapeziumArea,width,ang1Tan,ang2Tan);//calculating the height
+		double ExpectedCurveArea = intialCurveArea*(degree_0_percentage/100);
+		TopoDS_Wire newWholeWire=createNewShapeWithRightArea(newTrapeziumHeight,width,ang1Tan,ang2Tan,expectedWholeArea,initialHeight);
 
+		TopoDS_Wire thicknessWire=createNewTrapazium(height+(thickness*2),width+(thickness*2),ang1Tan,ang2Tan);
+		double thicknessWireArea=getSurfaceArea(thicknessWire);
 
+		double thicknessRatio= thicknessWireArea/initialTrapaziumArea;
 
+		CString tWhole;
+		CString tNew;
 
-		//for(int i=2;i<=18;i++){
+		tWhole.Format(_T("whole %g \n"),initialTrapaziumArea);
+		tNew.Format(_T("new %g \n"),thicknessWireArea);
 
-		//	double ang=20*(i-1);
-		//	transfer.SetRotation(axis,ang*PI/180);
+		AfxMessageBox(tWhole+tNew);
+		TopoDS_Shape rotatedShape;
+		gp_Trsf transfer;
+		BRepOffsetAPI_ThruSections sections;
+		BRepOffsetAPI_ThruSections scaledSections;
+		gp_Ax1 axis(gp_Pnt(0,-15,0),gp_Dir(1,0,0));
+		//initial wire rotation
 
 
-		//	double expectedWholeArea = initailWholeArea*((areaIncreasingFactor/100)*i);
-		//	double ExpectedTrapeziumArea = initialTrapaziumArea*((areaIncreasingFactor/100)*i);
-		//	double newTrapeziumHeight=getTrapezuimHeight(ExpectedTrapeziumArea,width,ang1Tan,ang2Tan);
-		//	newWholeWire=createNewShapeWithRightArea(newTrapeziumHeight,width,ang1Tan,ang2Tan,expectedWholeArea,initialHeight);
+		double ang=360;
+		transfer.SetRotation(axis,ang*PI/180);
+		BRepBuilderAPI_Transform rotated(newWholeWire,transfer);
+		rotatedShape=rotated.Shape();
+		newWholeWire=TopoDS::Wire(rotatedShape);
+		sections.AddWire(newWholeWire);
 
+		gp_Pnt centrePoint1=getCentrePoint(newWholeWire);
+		gp_Trsf scaleTrf;
+		scaleTrf.SetScale(centrePoint1,thicknessRatio);
+		BRepBuilderAPI_Transform scaled1(newWholeWire,scaleTrf);
+		TopoDS_Wire scaledNewWire =TopoDS::Wire(scaled1.Shape());
 
-		//	BRepBuilderAPI_Transform rotated(newWholeWire,transfer);
+		scaledSections.AddWire(scaledNewWire);
+		double areaIncreasingFactor=(100-degree_0_percentage)/18;
+		CString areaIncreacingFactor;
 
-		//	rotatedShape=rotated.Shape();
-		//	newWholeWire=TopoDS::Wire(rotatedShape);
 
+		for(int i=2;i<=18;i++){
 
-		//	sections.AddWire(newWholeWire);
+			double ang=20*(i-1);
+			transfer.SetRotation(axis,ang*PI/180);
 
 
-		//}
+			double expectedWholeArea = initailWholeArea*((areaIncreasingFactor/100)*i);
+			double ExpectedTrapeziumArea = initialTrapaziumArea*((areaIncreasingFactor/100)*i);
+			double newTrapeziumHeight=getTrapezuimHeight(ExpectedTrapeziumArea,width,ang1Tan,ang2Tan);
+			newWholeWire=createNewShapeWithRightArea(newTrapeziumHeight,width,ang1Tan,ang2Tan,expectedWholeArea,initialHeight);
 
+			m_pcoloredshapeList->Add(Quantity_NOC_RED,newWholeWire);
+			
 
-		//ang=360;
-		//transfer.SetRotation(axis,ang*PI/180);
-		//BRepBuilderAPI_Transform rotated1(initialwholeWire,transfer);
-		//rotatedShape=rotated1.Shape();
-		//newWholeWire=TopoDS::Wire(rotatedShape);
-		//sections.AddWire(newWholeWire);
 
 
+			gp_Pnt centrePoint=getCentrePoint(newWholeWire);
+			gp_Trsf scaleTrf;
+			scaleTrf.SetScale(centrePoint,thicknessRatio);
+			BRepBuilderAPI_Transform scaled(newWholeWire,scaleTrf);
+			TopoDS_Wire scaledNewWire =TopoDS::Wire(scaled.Shape());
+			m_pcoloredshapeList->Add(Quantity_NOC_SPRINGGREEN,scaledNewWire);
 
+			scaledSections.AddWire(scaledNewWire);
+			sections.AddWire(newWholeWire);
+			BRepBuilderAPI_Transform rotated(newWholeWire,transfer);
 
-		////TopoDS_Wire newWholeWire=createNewShapeWithRightArea(newTrapeziumHeight,width,ang1Tan,ang2Tan,expectedWholeArea,initialHeight);
+			rotatedShape=rotated.Shape();
+			newWholeWire=TopoDS::Wire(rotatedShape);
+			
 
-		//double newWholArea=getSurfaceArea(newWholeWire);
+		}
 
 
+		ang=360;
+		transfer.SetRotation(axis,ang*PI/180);
+		BRepBuilderAPI_Transform rotated1(initialwholeWire,transfer);
+		rotatedShape=rotated1.Shape();
+		newWholeWire=TopoDS::Wire(rotatedShape);
+		sections.AddWire(newWholeWire);
+		
 
-		////TopoDS_Wire newCurveWire=createNewCurve(newTrapeziumHeight,width,ang1Tan,ang2Tan,ExpectedCurveArea);
-		////double newlyCreatedCurveWireArea=getSurfaceArea(newCurveWire);
-		///*TopoDS_Wire newWhaoleshape=createTrapazium(newTrapeziumHeight,width,ang1Tan,ang2Tan);
-		//double areaOfNewWholeShape=getSurfaceArea(newWhaoleshape);*/
-		////TopoDS_Wire newTrapazium=createNewTrapazium(newTrapeziumHeight,width,ang1Tan,ang2Tan);
-		////double newTrapazimArea=getSurfaceArea(newTrapazium);
 
-		////sections.Build();
+		gp_Pnt centrePoint=getCentrePoint(newWholeWire);
+		 scaleTrf;
+		scaleTrf.SetScale(centrePoint,thicknessRatio);
+		BRepBuilderAPI_Transform scaled2(newWholeWire,scaleTrf);
+		 scaledNewWire =TopoDS::Wire(scaled2.Shape());
 
-		////double number=getTrapezuimHeight(initialTrapaziumArea,width,ang1Tan,ang2Tan);
+		scaledSections.AddWire(scaledNewWire);
+		double newWholArea=getSurfaceArea(newWholeWire);
 
+		CString initialWholeAreaString;
+		CString expectedWholeAreaString;
+		CString newWholeAreaString;
+		CString msg;
+		double exitAreaFraction=0.8;
+		double exitPipeLength=40;
 
+		msg=initialWholeAreaString+expectedWholeAreaString+newWholeAreaString;
+		AfxMessageBox(msg);
 
+		sections.Build();
+		scaledSections.Build();
 
-		//CString initialWholeAreaString;
-		//CString expectedWholeAreaString;
-		//CString newWholeAreaString;
-		//CString msg;
-		//initialWholeAreaString.Format(_T("initialWholeAreaString %g \n" ),initailWholeArea);
-		//expectedWholeAreaString.Format(_T("expectedWholeAreaString %g \n"),expectedWholeArea);
-		//newWholeAreaString.Format(_T("newWholeArea %g \n"),newWholArea);
+		TopoDS_Shape sh1=sections.Shape();
+		TopoDS_Shape completeVolute=sections.Shape();
+		TopoDS_Shape scaledVolute=scaledSections.Shape();
+		//circle
+		gp_Dir dir(0,0,1); 
+		double exitPipeRadius=sqrt((initailWholeArea*exitAreaFraction)/PI);
 
 
+		gp_Pnt point(width/2,height*0.7,exitPipeLength);
 
 
+		gp_Circ circle1(gp_Ax2( point, dir), exitPipeRadius);
+		BRepBuilderAPI_MakeEdge circle(circle1);
+		BRepBuilderAPI_MakeWire exitPipeCircleWire(circle);
+		BRepBuilderAPI_MakeFace faceToBeRemoved(exitPipeCircleWire); 
+		BRepOffsetAPI_ThruSections exitSection;		
+		gp_Circ circleT(gp_Ax2( point, dir), exitPipeRadius+thickness*10);
+		BRepBuilderAPI_MakeEdge circleT1(circleT);
+		BRepBuilderAPI_MakeWire exitPipeCircleWireT(circleT1);
+		BRepBuilderAPI_MakeFace exitFace(exitPipeCircleWireT);
+		BRepOffsetAPI_ThruSections thicknessExitSection;
 
-		////areaOfNewTrapziumString.Format(_T("area of new Trapazium %g \n"),newTrapazimArea);
-		//msg=initialWholeAreaString+expectedWholeAreaString+newWholeAreaString;
-		//AfxMessageBox(msg);
 
-		//sections.Build();
+		thicknessExitSection.AddWire(scaledNewWire);
+		thicknessExitSection.AddWire(exitPipeCircleWireT);
+		thicknessExitSection.Build();
+		TopoDS_Shape thicknessAddedPipe=thicknessExitSection.Shape();
 
-		//TopoDS_Shape sh1=sections.Shape();
+		exitSection.AddWire(initialwholeWire);
+		exitSection.AddWire(exitPipeCircleWire);
+		exitSection.Build();
+		TopoDS_Shape exitPipe=exitSection.Shape();
 
-		//BRepTools::Write(sh1,"D:/Breps/whoaleShape.brep");	
+		
 
+		TopoDS_Compound completeShape;
+		BRep_Builder aBuilder;
+		aBuilder.MakeCompound (completeShape);
+		aBuilder.Add(completeShape,completeVolute);
+		aBuilder.Add(completeShape,exitPipe);
 
-		////m_pcoloredshapeList->Add(Quantity_NOC_YELLOW, sh1);
-		//m_pcoloredshapeList->Add(Quantity_NOC_STEELBLUE,sh1);
-		//m_pcoloredshapeList->Display(myAISContext);
+		TopoDS_Shape voluteAndExit=completeShape;
 
+		TopoDS_Compound completeScaledShape;
+		BRep_Builder builder1;
+		builder1.MakeCompound(completeScaledShape);
+		builder1.Add(completeScaledShape,scaledVolute);
+		builder1.Add(completeScaledShape,thicknessAddedPipe);
+
+		
+		//	BRepTools::Write(sh2,"D:/Breps/scale.brep");	
+
+
+		//m_pcoloredshapeList->Add(Quantity_NOC_YELLOW, completeShape);
+		//m_pcoloredshapeList->Add(Quantity_NOC_SPRINGGREEN,scaledVolute);
+		//m_pcoloredshapeList->Add(Quantity_NOC_SPRINGGREEN,completeScaledShape);
+
+		//m_pcoloredshapeList->Add(Quantity_NOC_STEELBLUE,sh2);
+		m_pcoloredshapeList->Display(myAISContext);
+		Fit();
+
+	}
+
+
+
+	gp_Pnt CImportExportDoc::getCentrePoint(TopoDS_Wire wire)
+	{
+		BRepBuilderAPI_MakeFace wireFace(wire);
+		TopoDS_Face face =wireFace;
+		BRepGProp gprop; 
+		GProp_GProps surfaceProps;
+
+		gprop.SurfaceProperties(wireFace,surfaceProps);
+
+		gp_Pnt point=surfaceProps.CentreOfMass();
+
+		return point;
 
 
 
@@ -518,52 +609,32 @@ IMPLEMENT_DYNCREATE(CImportExportDoc, OCC_3dDoc)
 		double up=height*4;
 		double bottom=height;
 		double middle=(up-bottom)/2.0;
-
-
 		double surfaceArea =getSurfaceArea(wholeWire);
 		double left= expectedArea-(expectedArea*variationTolerance);
 		double right=expectedArea+(expectedArea*variationTolerance);
-
 		double Tolerance =  0.01*expectedArea; 
-
-
 		double topMiddle=up;
 		double bottomMiddle=bottom; 
 
 		if(fabs(expectedArea-surfaceArea)<Tolerance){
-			/*CString  msg="if condition";
-			AfxMessageBox(msg);*/
+
 			return wholeWire;
 
 		}else{
-
-
-			/*CString  msg="else";
-			AfxMessageBox(msg);*/
-
 			while(fabs(expectedArea-surfaceArea)>Tolerance){
 
-				//CString  msg="while";
-				//AfxMessageBox(msg);
 				if(surfaceArea<expectedArea){
-
 					up=up;
 					bottom=middle;
 					middle=(up+middle)/2;
-
-
 				}else{
-
 					bottom=bottom;
 					up=middle;
 					middle=(middle+bottom)/2;
-
 				}
 				wholeWire=createNewShapeAccordingToR1height(height,width,ang1Tan,ang2Tan,middle);
 				surfaceArea=getSurfaceArea(wholeWire);
-
 			}
-
 		}
 
 		return wholeWire;
@@ -644,7 +715,24 @@ IMPLEMENT_DYNCREATE(CImportExportDoc, OCC_3dDoc)
 	}
 
 	*/
+	TopoDS_Wire CImportExportDoc:: createNewTrapazium(double height,double width, double ang1Tan,double ang2Tan)
+	{
+		gp_Pnt q1(0,0,0); 
+		gp_Pnt q2(-(height/ang2Tan),height,0);
+		gp_Pnt p1(width,0,0);
+		gp_Pnt p2(((height/ang1Tan)+width),height,0);
 
+		BRepBuilderAPI_MakeEdge line1(p1,p2);
+		BRepBuilderAPI_MakeEdge line2(q1,q2);
+		BRepBuilderAPI_MakeEdge line3(q1,p1);
+		BRepBuilderAPI_MakeEdge line4(q2,p2);
+
+		BRepBuilderAPI_MakeWire trapeziumWire(line1,line3,line2,line4);
+
+		return trapeziumWire;
+
+
+	} 
 
 	TopoDS_Wire CImportExportDoc::createTrapazium(double height,double width,double ang1Tan,double ang2Tan){
 

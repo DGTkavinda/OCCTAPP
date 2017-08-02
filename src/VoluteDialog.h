@@ -34,7 +34,7 @@ public:
 	CEdit m_edtPercentage;
 	CEdit m_edtFraction;
 	CEdit m_edtLength;
-
+	CEdit m_edtInlet;
 // Dialog Data
 	enum { IDD = IDD_DIALOG_Volute };
 
